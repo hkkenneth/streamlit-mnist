@@ -50,7 +50,7 @@ if upload_file is not None:
   # To read file as bytes:
   bytes_data = upload_file.getvalue()
   uploaded_image = Image.open(io.BytesIO(bytes_data))
-  st.write(uploaded_image)
-  #output = session.run([], {input_name: [[ ...astype(np.float32)]]})[0]
-  #print(np.argmax([o[0] for o in outputs], axis=1))
-  #st.write(np.argmax(output) + 1)
+  # Ref: https://docs.streamlit.io/library/api-reference/media/st.image
+  st.image(uploaded_image, 'Uploaded image')
+  output = session.run([], {input_name: [[ np.asarray(uploaded_image).reshape(28, 28).astype(np.float32)]]})[0]
+  st.write('Predicted output: %d' % np.argmax(output))
