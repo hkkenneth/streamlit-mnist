@@ -32,7 +32,7 @@ st.pyplot(plt)
 
 if st.button('Download chosen image'):
   Image.fromarray(test_images[int(chosen_index) - 1].reshape(28, 28)).save('user-download.png')
-  st.write('Image ready for download)'
+  st.write('Image ready for download')
   with open('user-download.png', "rb") as file:
     btn = st.download_button(label="Download",
                              data=file,
