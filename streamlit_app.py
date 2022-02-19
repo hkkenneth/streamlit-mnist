@@ -53,4 +53,5 @@ if upload_file is not None:
   # Ref: https://docs.streamlit.io/library/api-reference/media/st.image
   st.image(uploaded_image, 'Uploaded image')
   output = session.run([], {input_name: [[ np.asarray(uploaded_image).reshape(28, 28).astype(np.float32)]]})[0]
-  st.write('Predicted output: %d' % np.argmax(output))
+  st.write('Predicted output: %d\nRaw model output:' % np.argmax(output))
+  st.write(output)
