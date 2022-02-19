@@ -30,21 +30,26 @@ if st.button('Predict'):
 plt.imshow(test_images[int(chosen_index) - 1], interpolation='nearest')
 st.pyplot(plt)
 
+# Ref: https://docs.streamlit.io/library/api-reference/widgets/st.button
 if st.button('Download chosen image'):
+  # Ref: https://gist.github.com/xkumiyu/c93222f2dce615f4b264a9e71f6d49e0
   Image.fromarray(test_images[int(chosen_index) - 1].reshape(28, 28)).save('user-download.png')
   st.write('Image ready for download')
   with open('user-download.png', "rb") as file:
+    # Ref: https://docs.streamlit.io/library/api-reference/widgets/st.download_button
     btn = st.download_button(label="Download",
                              data=file,
                              file_name="mnist_test_%i.png" % (int(chosen_index) - 1),
                              mime="image/png"
                             )
 
-upload_file = st.file_uploader(label='Upload Image File (TODO)')
+upload_file = st.file_uploader(label='Predict uploaded MNIST image file')
 
 if upload_file is not None:
   # To read file as bytes:
   bytes_data = upload_file.getvalue()
+  uploaded_image = Image.open(io.BytesIO(bytes_data))
+  st.write(uploaded_image)
   #output = session.run([], {input_name: [[ ...astype(np.float32)]]})[0]
   #print(np.argmax([o[0] for o in outputs], axis=1))
   #st.write(np.argmax(output) + 1)
