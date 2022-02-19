@@ -17,11 +17,6 @@ if os.path.exists('mnist-8.onnx'):
 
 test_images = mnist.test_images()
 
-if st.button('Predict'):
-  output = session.run([], {input_name: [[test_images[int(chosen_index) - 1].astype(np.float32)]]})[0]
-  #print(np.argmax([o[0] for o in outputs], axis=1))
-  st.write(output)
-
 chosen_index = st.number_input('Choose an image', min_value=1, max_value=10000, value=1, step=1)
 plt.imshow(test_images[int(chosen_index) - 1], interpolation='nearest')
 st.pyplot(plt)
@@ -32,3 +27,8 @@ if upload_file is not None:
   # To read file as bytes:
   bytes_data = upload_file.getvalue()
   st.write(bytes_data)
+
+if st.button('Predict'):
+  output = session.run([], {input_name: [[test_images[int(chosen_index) - 1].astype(np.float32)]]})[0]
+  #print(np.argmax([o[0] for o in outputs], axis=1))
+  st.write(output)
