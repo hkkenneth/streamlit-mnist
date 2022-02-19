@@ -1,8 +1,9 @@
 import streamlit as st
-import urllib.request
 import os
 import onnxruntime
 import mnist
+import numpy as np
+import urllib.request
 from matplotlib import pyplot as plt
 
 onnx_model_url = 'https://github.com/onnx/models/blob/main/vision/classification/mnist/model/mnist-8.onnx?raw=true'
