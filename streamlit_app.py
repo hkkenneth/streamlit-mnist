@@ -48,7 +48,7 @@ upload_file = st.file_uploader(label='Predict uploaded MNIST image file')
 if upload_file is not None:
   # To read file as bytes:
   bytes_data = upload_file.getvalue()
-  uploaded_image = Image.open(io.BytesIO(bytes_data))
+  uploaded_image = Image.open(bytes_data)
   st.write(uploaded_image)
   #output = session.run([], {input_name: [[ ...astype(np.float32)]]})[0]
   #print(np.argmax([o[0] for o in outputs], axis=1))
