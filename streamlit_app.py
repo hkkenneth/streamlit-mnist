@@ -32,4 +32,4 @@ if upload_file is not None:
 if st.button('Predict'):
   output = session.run([], {input_name: [[test_images[int(chosen_index) - 1].astype(np.float32)]]})[0]
   #print(np.argmax([o[0] for o in outputs], axis=1))
-  st.write(output)
+  st.write(np.argmax(output) + 1)
