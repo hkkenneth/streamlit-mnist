@@ -2,6 +2,7 @@ import streamlit as st
 import urllib.request
 import os
 import onnxruntime
+import mnist
 
 onnx_model_url = 'https://github.com/onnx/models/blob/main/vision/classification/mnist/model/mnist-8.onnx?raw=true'
 if not os.path.exists('mnist-8.onnx'):
@@ -12,6 +13,11 @@ if os.path.exists('mnist-8.onnx'):
   session = onnxruntime.InferenceSession('mnist-8.onnx', None)
   st.write('Model loaded')
 
+test_images = mnist.test_images()
+
+chosen_index = st.selectbox('Choose an image', (0, 1, 2))
+st.write(test_images[int(chosen_index)])
+  
 upload_file = st.file_uploader(label='Upload Image File')
 
 if upload_file is not None:
